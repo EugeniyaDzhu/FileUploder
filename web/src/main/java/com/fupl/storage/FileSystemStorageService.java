@@ -38,8 +38,9 @@ public class FileSystemStorageService implements StorageService {
 
 
     @Override
-    public void store(MultipartFile file) {
+    public String store(MultipartFile file) {
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
+        String message = "You successfully uploaded ";
         if (file.isEmpty()) {
             throw new StorageException("Failed to store empty file " + filename);
         }
@@ -49,11 +50,16 @@ public class FileSystemStorageService implements StorageService {
                             + filename);
         }
         try {
-            if (!(fileRepository.existsByName(filename))){
-            fileRepository.save(new FileEntity(filename, file.getBytes()));}
+            if (!(fileRepository.existsByName(filename))) {
+                fileRepository.save(new FileEntity(filename, file.getBytes()));
+            } else {
+                message = "File is already present with specified name. Uploading is rejected ";
+            }
+            ;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        return message;
     }
 
     @Override
