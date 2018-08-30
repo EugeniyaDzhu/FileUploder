@@ -1,9 +1,6 @@
 package com.fupl.entityes;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class FileEntity {
@@ -12,6 +9,7 @@ public class FileEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
+    @Column(columnDefinition="LONGBLOB")
     private byte[] content;
 
 

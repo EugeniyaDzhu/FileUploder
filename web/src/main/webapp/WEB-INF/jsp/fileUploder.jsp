@@ -15,11 +15,11 @@
 </form>
 <br/>
 <c:forEach var="fileName" items="${fileNames}">
-    <a href="<spring:url value="/show/${fileName}"/>">"${fileName}"</a> <br/>
+    <a href="<spring:url value="/show/${fileName}"/>">show "${fileName}"</a> <br/>
 </c:forEach>
 <br/>
 <c:forEach var="file" items="${files}">
-    <a href="<spring:url value="/download/${file}"/>">"${file}"</a> <br/>
+    <a href="<spring:url value="/download/${file}"/>">download "${file}"</a> <br/>
 </c:forEach>
 </body>
 </html>
